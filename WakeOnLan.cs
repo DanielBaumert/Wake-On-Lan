@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -18,6 +18,7 @@ namespace Se7en.MagicWakeOnLan
 
         public WakeOnLan()
         {
+            Console.Clear();
             _dirPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Se7en", "WakeOnLan");
             _filePath = Path.Combine(_dirPath, "config");
 
@@ -49,7 +50,7 @@ namespace Se7en.MagicWakeOnLan
             do
             {
                 Console.WriteLine("[1] Add new device");
-                Console.WriteLine("[2] Add new device");
+                Console.WriteLine("[2] Edit device");
                 Console.WriteLine("[3] Remove device");
                 Console.WriteLine("[4] Wake up a device");
                 Console.WriteLine("[0] Exit");
@@ -94,12 +95,12 @@ namespace Se7en.MagicWakeOnLan
                 return;
             }
             ReadInputT("Please type in the mac-address: ", out PhysicalAddress mac, ReadInputMac);
-            if(mac == default)
+            if (mac == default)
             {
                 return;
             }
             ReadInputT("Please type in the port(default: 9): ", out int port, ReadInputPort);
-            if(port == -1)
+            if (port == -1)
             {
                 return;
             }
@@ -240,8 +241,8 @@ namespace Se7en.MagicWakeOnLan
                     case "2":
                         {
                             WriteError("Type -1 as mac-address to exit!");
-                            ReadInputT("Please type in a device nickname: ", out PhysicalAddress mac, ReadInputMac);
-                            if(mac != default)
+                            ReadInputT("Please type in a device mac-address: ", out PhysicalAddress mac, ReadInputMac);
+                            if (mac != default)
                             {
                                 device.Mac = mac;
                             }
@@ -250,7 +251,7 @@ namespace Se7en.MagicWakeOnLan
                     case "3":
                         {
                             WriteError("Type -1 as port to exit!");
-                            ReadInputT("Please type in a device nickname: ", out int port, ReadInputPort);
+                            ReadInputT("Please type in a device port: ", out int port, ReadInputPort);
                             if (port != -1)
                             {
                                 device.Port = port;
@@ -351,6 +352,7 @@ namespace Se7en.MagicWakeOnLan
 
         private void WakeUp()
         {
+            Console.Clear();
             while (true)
             {
                 PrintDevices();
@@ -446,7 +448,7 @@ namespace Se7en.MagicWakeOnLan
             {
                 Console.Write(message);
                 string input = Console.ReadLine().Trim(' ');
-                if(input == "-1")
+                if (input == "-1")
                 {
                     result = default;
                     return;
@@ -463,7 +465,7 @@ namespace Se7en.MagicWakeOnLan
             {
                 name = input;
                 return true;
-            } 
+            }
             WriteError("Please choose a name without tab");
             name = null;
             return false;
