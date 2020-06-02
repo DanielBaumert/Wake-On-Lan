@@ -8,7 +8,7 @@ using System.Net.Sockets;
 
 namespace Se7en.MagicWakeOnLan
 {
-    class WakeOnLan
+    internal class WakeOnLan : IDisposable
     {
         private delegate TOut Func<T1, T2, TOut>(T1 t1, out T2 t2);
         private string _dirPath;
@@ -21,7 +21,9 @@ namespace Se7en.MagicWakeOnLan
             Console.Clear();
             _dirPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Se7en", "WakeOnLan");
             _filePath = Path.Combine(_dirPath, "config");
-
+        }
+         
+        public void Run() { 
             if (!Directory.Exists(_dirPath))
             {
                 Directory.CreateDirectory(_dirPath);
@@ -627,6 +629,12 @@ namespace Se7en.MagicWakeOnLan
             device = WakeOnLanDevice.Default;
             return false;
         }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+
         private struct WakeOnLanDevice
         {
             private static readonly byte[] MAGIC_HEADER = { 0xff, 0xff, 0xff, 0xff, 0xff, 0xff };

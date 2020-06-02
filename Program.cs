@@ -4,7 +4,10 @@
     {
         static void Main(string[] args)
         {
-            new WakeOnLan();
+            using (WakeOnLan wakeOnLan = new WakeOnLan())
+            {
+                wakeOnLan.Run();
+            }
         }
        
     }
