@@ -18,12 +18,12 @@ namespace Se7en.MagicWakeOnLan
 
         public WakeOnLan()
         {
-            Console.Clear();
             _dirPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Se7en", "WakeOnLan");
             _filePath = Path.Combine(_dirPath, "config");
         }
          
         public void Run() { 
+            Console.Clear();
             if (!Directory.Exists(_dirPath))
             {
                 Directory.CreateDirectory(_dirPath);
